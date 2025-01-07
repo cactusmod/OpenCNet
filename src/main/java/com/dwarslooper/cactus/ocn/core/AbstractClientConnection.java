@@ -1,14 +1,19 @@
 package com.dwarslooper.cactus.ocn.core;
 
 import com.dwarslooper.cactus.ocn.protocol.impl.IPacketIn;
+import com.dwarslooper.cactus.ocn.protocol.impl.IPacketOut;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
 public abstract class AbstractClientConnection extends SimpleChannelInboundHandler<IPacketIn> implements IClientConnection {
 
+    private Channel channel;
+
     @Override
     public final void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);
+        this.channel = ctx.channel();
         connected(ctx);
     }
 
@@ -29,6 +34,10 @@ public abstract class AbstractClientConnection extends SimpleChannelInboundHandl
         if(shouldHandle(iPacketIn)) {
             iPacketIn.handle(this);
         }
+    }
+
+    public void sendPacket(IPacketOut packet) {
+        channel.writeAndFlush(packet);
     }
 
     public static AbstractClientConnection createDefault() {

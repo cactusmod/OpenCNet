@@ -52,5 +52,6 @@ public class CNetServer {
 
     public void shutdown() {
         loopGroup.shutdownGracefully();
+        channel.close();
     }
 }
