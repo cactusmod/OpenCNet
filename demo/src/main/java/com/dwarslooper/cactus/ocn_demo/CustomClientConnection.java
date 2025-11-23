@@ -1,7 +1,7 @@
 package com.dwarslooper.cactus.ocn_demo;
 
-import com.dwarslooper.cactus.ocn.core.AbstractClientConnection;
-import com.dwarslooper.cactus.ocn.protocol.impl.IPacketIn;
+import com.dwarslooper.cactus.ocn_server.connection.AbstractClientConnection;
+import com.dwarslooper.cactus.ocn_server.protocol.packet.IServerPacketIn;
 import io.netty.channel.ChannelHandlerContext;
 
 public class CustomClientConnection extends AbstractClientConnection {
@@ -22,12 +22,12 @@ public class CustomClientConnection extends AbstractClientConnection {
     }
 
     @Override
-    public void handle(ChannelHandlerContext channelHandlerContext, IPacketIn packet) {
+    public void handle(ChannelHandlerContext channelHandlerContext, IServerPacketIn packet) {
         super.handle(channelHandlerContext, packet);
     }
 
     @Override
-    public boolean shouldHandle(IPacketIn packet) {
+    public boolean shouldHandle(IServerPacketIn packet) {
         return super.shouldHandle(packet);
     }
 }

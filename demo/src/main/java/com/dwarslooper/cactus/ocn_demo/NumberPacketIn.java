@@ -1,10 +1,10 @@
 package com.dwarslooper.cactus.ocn_demo;
 
-import com.dwarslooper.cactus.ocn.core.AbstractClientConnection;
-import com.dwarslooper.cactus.ocn.protocol.impl.IPacketIn;
+import com.dwarslooper.cactus.ocn_server.connection.AbstractClientConnection;
+import com.dwarslooper.cactus.ocn_server.protocol.packet.IServerPacketIn;
 import io.netty.buffer.ByteBuf;
 
-public class NumberPacketIn implements IPacketIn {
+public class NumberPacketIn implements IServerPacketIn {
 
     private int number;
 

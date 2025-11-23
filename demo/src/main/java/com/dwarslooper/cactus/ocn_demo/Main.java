@@ -1,9 +1,9 @@
 package com.dwarslooper.cactus.ocn_demo;
 
-import com.dwarslooper.cactus.ocn.core.CNetServer;
-import com.dwarslooper.cactus.ocn.protocol.impl.ProtocolImpl;
-import com.dwarslooper.cactus.ocn.core.CNetServerBuilder;
-import com.dwarslooper.cactus.ocn.protocol.impl.builder.ProtocolBuilder;
+import com.dwarslooper.cactus.ocn_commons.network.protocol.builder.ProtocolBuilder;
+import com.dwarslooper.cactus.ocn_commons.network.protocol.impl.ProtocolImpl;
+import com.dwarslooper.cactus.ocn_server.CNetServer;
+import com.dwarslooper.cactus.ocn_server.builder.CNetServerBuilder;
 import io.netty.channel.ChannelOption;
 
 public class Main {

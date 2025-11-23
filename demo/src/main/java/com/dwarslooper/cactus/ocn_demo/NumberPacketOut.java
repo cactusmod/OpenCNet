@@ -1,9 +1,9 @@
 package com.dwarslooper.cactus.ocn_demo;
 
-import com.dwarslooper.cactus.ocn.protocol.impl.IPacketOut;
+import com.dwarslooper.cactus.ocn_server.protocol.packet.IServerPacketOut;
 import io.netty.buffer.ByteBuf;
 
-public class NumberPacketOut implements IPacketOut {
+public class NumberPacketOut implements IServerPacketOut {
 
     private final int number;
 
