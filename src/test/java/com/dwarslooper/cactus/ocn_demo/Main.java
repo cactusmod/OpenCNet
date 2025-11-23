@@ -2,7 +2,7 @@ package com.dwarslooper.cactus.ocn_demo;
 
 import com.dwarslooper.cactus.ocn.core.CNetServer;
 import com.dwarslooper.cactus.ocn.protocol.impl.ProtocolImpl;
-import com.dwarslooper.cactus.ocn.protocol.impl.builder.CNetServerBuilder;
+import com.dwarslooper.cactus.ocn.core.CNetServerBuilder;
 import com.dwarslooper.cactus.ocn.protocol.impl.builder.ProtocolBuilder;
 import io.netty.channel.ChannelOption;
 
