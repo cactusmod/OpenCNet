@@ -1,12 +1,13 @@
 package com.dwarslooper.cactus.ocn_server.connection;
 
-import com.dwarslooper.cactus.ocn.protocol.impl.IPacketIn;
-import com.dwarslooper.cactus.ocn.protocol.impl.IPacketOut;
+import com.dwarslooper.cactus.ocn_commons.network.protocol.packet.IPacketIn;
+import com.dwarslooper.cactus.ocn_commons.network.protocol.packet.IPacketOut;
+import com.dwarslooper.cactus.ocn_server.protocol.packet.IServerPacketIn;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
-public abstract class AbstractClientConnection extends SimpleChannelInboundHandler<IPacketIn> implements IClientConnection {
+public abstract class AbstractClientConnection extends SimpleChannelInboundHandler<IServerPacketIn> implements IClientConnection {
 
     private Channel channel;
 
@@ -30,7 +31,7 @@ public abstract class AbstractClientConnection extends SimpleChannelInboundHandl
     }
 
     @Override
-    protected final void channelRead0(ChannelHandlerContext channelHandlerContext, IPacketIn iPacketIn) {
+    protected final void channelRead0(ChannelHandlerContext channelHandlerContext, IServerPacketIn iPacketIn) {
         if(shouldHandle(iPacketIn)) {
             iPacketIn.handle(this);
         }
@@ -53,7 +54,7 @@ public abstract class AbstractClientConnection extends SimpleChannelInboundHandl
             }
 
             @Override
-            public void handle(ChannelHandlerContext channelHandlerContext, IPacketIn packet) {
+            public void handle(ChannelHandlerContext channelHandlerContext, IServerPacketIn packet) {
                 throw new UnsupportedOperationException("Handling on connection class is unsupported in default configuration");
             }
         };

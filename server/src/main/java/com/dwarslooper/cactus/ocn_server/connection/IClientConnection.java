@@ -1,6 +1,6 @@
 package com.dwarslooper.cactus.ocn_server.connection;
 
-import com.dwarslooper.cactus.ocn.protocol.impl.IPacketIn;
+import com.dwarslooper.cactus.ocn_server.protocol.packet.IServerPacketIn;
 import io.netty.channel.ChannelHandlerContext;
 
 public interface IClientConnection {
@@ -8,7 +8,7 @@ public interface IClientConnection {
     void connected(ChannelHandlerContext ctx);
     void disconnected(ChannelHandlerContext ctx);
 
-    default void handle(ChannelHandlerContext channelHandlerContext, IPacketIn packet) {
+    default void handle(ChannelHandlerContext channelHandlerContext, IServerPacketIn packet) {
 
     }
 
@@ -16,7 +16,7 @@ public interface IClientConnection {
 
     }
 
-    default boolean shouldHandle(IPacketIn packet) {
+    default boolean shouldHandle(IServerPacketIn packet) {
         return true;
     }
 
