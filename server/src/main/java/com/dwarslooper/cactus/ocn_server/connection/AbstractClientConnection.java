@@ -1,8 +1,7 @@
 package com.dwarslooper.cactus.ocn_server.connection;
 
-import com.dwarslooper.cactus.ocn_commons.network.protocol.packet.IPacketIn;
-import com.dwarslooper.cactus.ocn_commons.network.protocol.packet.IPacketOut;
 import com.dwarslooper.cactus.ocn_server.protocol.packet.IServerPacketIn;
+import com.dwarslooper.cactus.ocn_server.protocol.packet.IServerPacketOut;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -37,7 +36,7 @@ public abstract class AbstractClientConnection extends SimpleChannelInboundHandl
         }
     }
 
-    public void sendPacket(IPacketOut packet) {
+    public void sendPacket(IServerPacketOut packet) {
         channel.writeAndFlush(packet);
     }
 
