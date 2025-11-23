@@ -1,5 +1,6 @@
 package com.dwarslooper.cactus.ocn_server;
 
+import com.dwarslooper.cactus.ocn_commons.network.CommonNettyApplication;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -9,19 +10,12 @@ import org.apache.logging.log4j.Logger;
 
 import java.net.InetSocketAddress;
 
-public class CNetServer {
+public class CNetServer extends CommonNettyApplication {
 
     public static final Logger LOGGER = LogManager.getLogger(CNetServer.class);
 
-    private EventLoopGroup loopGroup;
-    private Channel channel;
-
-    private final InetSocketAddress address;
-    private final ChannelInitializer<?> initializer;
-
     public CNetServer(InetSocketAddress address, ChannelInitializer<?> initializer) {
-        this.address = address;
-        this.initializer = initializer;
+        super(address, initializer);
     }
 
     public void start() {
@@ -29,11 +23,12 @@ public class CNetServer {
             return;
         }
 
-        if(loopGroup == null) {
-            loopGroup = new NioEventLoopGroup();
-        }
-
-        ChannelFuture future = new ServerBootstrap().channel(NioServerSocketChannel.class).childHandler(initializer).group(loopGroup).localAddress(address).bind();
+        ChannelFuture future = new ServerBootstrap()
+                .channel(NioServerSocketChannel.class)
+                .childHandler(getInitializer())
+                .group(getLoopGroup())
+                .localAddress(getAddress())
+                .bind();
 
         try {
             future.sync();
@@ -44,7 +39,7 @@ public class CNetServer {
     }
 
     public void shutdown() {
-        loopGroup.shutdownGracefully();
+        getLoopGroup().shutdownGracefully();
         channel.close();
     }
 }
