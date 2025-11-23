@@ -1,38 +1,38 @@
 package com.dwarslooper.cactus.ocn_server.connection;
 
+import com.dwarslooper.cactus.ocn_commons.network.IConnection;
 import com.dwarslooper.cactus.ocn_server.protocol.packet.IServerPacketIn;
 import com.dwarslooper.cactus.ocn_server.protocol.packet.IServerPacketOut;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
-public abstract class AbstractClientConnection extends SimpleChannelInboundHandler<IServerPacketIn> implements IClientConnection {
+public abstract class AbstractServerClientConnection extends SimpleChannelInboundHandler<IServerPacketIn> implements IConnection<IServerPacketIn> {
 
     private Channel channel;
 
     @Override
     public final void channelActive(ChannelHandlerContext ctx) throws Exception {
-        super.channelActive(ctx);
         this.channel = ctx.channel();
         connected(ctx);
+        super.channelActive(ctx);
     }
 
     @Override
     public final void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        super.channelInactive(ctx);
         disconnected(ctx);
+        super.channelInactive(ctx);
     }
 
     @Override
-    public final void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        super.exceptionCaught(ctx, cause);
+    public final void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         exception(ctx, cause);
     }
 
     @Override
-    protected final void channelRead0(ChannelHandlerContext channelHandlerContext, IServerPacketIn iPacketIn) {
-        if(shouldHandle(iPacketIn)) {
-            iPacketIn.handle(this);
+    protected final void channelRead0(ChannelHandlerContext channelHandlerContext, IServerPacketIn packet) {
+        if(shouldHandle(packet)) {
+            handle(channelHandlerContext, packet);
         }
     }
 
@@ -40,8 +40,8 @@ public abstract class AbstractClientConnection extends SimpleChannelInboundHandl
         channel.writeAndFlush(packet);
     }
 
-    public static AbstractClientConnection createDefault() {
-        return new AbstractClientConnection() {
+    public static AbstractServerClientConnection createDefault() {
+        return new AbstractServerClientConnection() {
             @Override
             public void connected(ChannelHandlerContext ctx) {
 
