@@ -1,14 +1,14 @@
 package com.dwarslooper.cactus.ocn_demo;
 
-import com.dwarslooper.cactus.ocn_server.connection.AbstractClientConnection;
+import com.dwarslooper.cactus.ocn_server.connection.AbstractServerClientConnection;
 import com.dwarslooper.cactus.ocn_server.protocol.packet.IServerPacketIn;
 import io.netty.channel.ChannelHandlerContext;
 
-public class CustomClientConnection extends AbstractClientConnection {
+public class CustomClientConnection extends AbstractServerClientConnection {
 
     @Override
     public void connected(ChannelHandlerContext ctx) {
-
+        System.out.println("server noted client connected! hello, world!");
     }
 
     @Override
@@ -23,7 +23,7 @@ public class CustomClientConnection extends AbstractClientConnection {
 
     @Override
     public void handle(ChannelHandlerContext channelHandlerContext, IServerPacketIn packet) {
-        super.handle(channelHandlerContext, packet);
+        packet.handle(this);
     }
 
     @Override
