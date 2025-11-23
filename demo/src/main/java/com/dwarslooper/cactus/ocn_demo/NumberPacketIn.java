@@ -1,6 +1,6 @@
 package com.dwarslooper.cactus.ocn_demo;
 
-import com.dwarslooper.cactus.ocn_server.connection.AbstractClientConnection;
+import com.dwarslooper.cactus.ocn_commons.network.IConnection;
 import com.dwarslooper.cactus.ocn_server.protocol.packet.IServerPacketIn;
 import io.netty.buffer.ByteBuf;
 
@@ -15,7 +15,7 @@ public class NumberPacketIn implements IServerPacketIn {
     }
 
     @Override
-    public void handle(AbstractClientConnection connection) {
+    public void handle(IConnection connection) {
         System.out.println("Number received: " + number);
     }
 

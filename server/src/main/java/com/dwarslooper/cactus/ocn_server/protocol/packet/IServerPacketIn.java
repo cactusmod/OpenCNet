@@ -1,10 +1,10 @@
 package com.dwarslooper.cactus.ocn_server.protocol.packet;
 
 import com.dwarslooper.cactus.ocn_commons.network.protocol.packet.IPacketIn;
-import com.dwarslooper.cactus.ocn_server.connection.AbstractClientConnection;
+import com.dwarslooper.cactus.ocn_commons.network.IConnection;
 
 public interface IServerPacketIn extends IPacketIn, IServerPreProcessing {
 
-	void handle(AbstractClientConnection connection);
+	void handle(IConnection connection);
 
 }
