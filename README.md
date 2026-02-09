@@ -60,7 +60,7 @@ Each packet is identified by a unique ID. This ID can occur once on both sides, 
 ProtocolImpl protocol = new ProtocolBuilder()
     .addIn(0, NumberPacketIn.class)
     .addOut(0, NumberPacketOut.class)
-    .build;
+    .build();
 ```
 
 ## Connection class
